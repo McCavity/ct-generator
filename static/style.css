@@ -1,0 +1,248 @@
+/* ── Reset ──────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Theme variables ─────────────────────────── */
+:root {
+  --bg:               #1a0a2e;
+  --surface:          rgba(255,255,255,0.06);
+  --surface-border:   rgba(255,255,255,0.10);
+  --text:             #ffffff;
+  --text-muted:       rgba(255,255,255,0.40);
+  --disc-bg:          rgba(255,107,107,0.12);
+  --disc-border:      rgba(255,107,107,0.30);
+  --disc-text:        #ff9f9f;
+
+  /* Die accent colours — fixed across all themes */
+  --c-art: #ff6b6b;
+  --c-d1:  #ffd93d;
+  --c-d2:  #6bcb77;
+  --c-d3:  #4d96ff;
+  --c-d4:  #c77dff;
+  --c-d5:  #ff9f43;
+}
+
+.theme-purple  { --bg: #1a0a2e; }
+.theme-red     { --bg: #1a0000; }
+.theme-blue    { --bg: #020a1a; }
+.theme-green   { --bg: #021a06; }
+.theme-yellow  { --bg: #1a1400; }
+.theme-magenta { --bg: #1a001a; }
+.theme-cyan    { --bg: #001a1a; }
+.theme-black   { --bg: #050505; }
+
+/* ── Language visibility ──────────────────────── */
+html[data-lang="de"] .lang-en { display: none; }
+html[data-lang="en"] .lang-de { display: none; }
+
+/* ── Base ─────────────────────────────────────── */
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 3rem;
+  transition: background 0.3s;
+}
+
+/* ── Header ───────────────────────────────────── */
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: clamp(1.3rem, 4vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--c-art), var(--c-d1), var(--c-d2), var(--c-d3), var(--c-d4));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+header .subtitle {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 0.3rem;
+}
+
+/* ── Language toggle ──────────────────────────── */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  user-select: none;
+  color: var(--text);
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.lang-toggle:hover { background: rgba(255,255,255,0.10); }
+
+.lang-toggle .flag { font-size: 1.1rem; }
+.lang-toggle .code { font-size: 0.82rem; opacity: 0.35; }
+.lang-toggle .sep  { font-size: 0.82rem; opacity: 0.2; padding: 0 2px; }
+
+html[data-lang="de"] .lang-toggle .code-de { opacity: 1; font-weight: 700; }
+html[data-lang="en"] .lang-toggle .code-en { opacity: 1; font-weight: 700; }
+
+/* ── Disclaimer banner ────────────────────────── */
+.disclaimer {
+  background: var(--disc-bg);
+  border: 1px solid var(--disc-border);
+  border-radius: 8px;
+  padding: 0.55rem 1.2rem;
+  margin-bottom: 2rem;
+  font-size: 0.8rem;
+  color: var(--disc-text);
+  text-align: center;
+  max-width: 820px;
+  width: 100%;
+}
+
+.disclaimer strong { color: var(--c-art); }
+
+/* ── Dice row ─────────────────────────────────── */
+.dice-row {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 940px;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.die-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: 0.9rem;
+  flex: 1;
+  min-width: 110px;
+  max-width: 148px;
+  text-align: center;
+  position: relative;
+}
+
+.die-card .die-label {
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.die-card .die-value {
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.die-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 0.54rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 2px 5px;
+  background: rgba(255,255,255,0.12);
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Per-die accent colours */
+.die-art { border-top: 3px solid var(--c-art); }
+.die-art .die-value { color: var(--c-art); }
+.die-d1  { border-top: 3px solid var(--c-d1); }
+.die-d1  .die-value { color: var(--c-d1); }
+.die-d2  { border-top: 3px solid var(--c-d2); }
+.die-d2  .die-value { color: var(--c-d2); }
+.die-d3  { border-top: 3px solid var(--c-d3); }
+.die-d3  .die-value { color: var(--c-d3); }
+.die-d4  { border-top: 3px solid var(--c-d4); }
+.die-d4  .die-value { color: var(--c-d4); }
+.die-d5  { border-top: 3px solid var(--c-d5); }
+.die-d5  .die-value { color: var(--c-d5); }
+
+/* ── Sentence box ─────────────────────────────── */
+.sentence-box {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  padding: 1.8rem 2rem;
+  max-width: 820px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.sentence-label {
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  margin-bottom: 0.9rem;
+}
+
+.sentence {
+  font-size: clamp(1.05rem, 2.8vw, 1.4rem);
+  font-weight: 700;
+  line-height: 1.8;
+}
+
+.s-art  { color: var(--c-art); }
+.s-d1   { color: var(--c-d1); }
+.s-d2   { color: var(--c-d2); }
+.s-d3   { color: var(--c-d3); }
+.s-d4   { color: var(--c-d4); }
+.s-d5   { color: var(--c-d5); }
+.s-func { color: var(--text-muted); font-weight: 400; font-size: 0.85em; }
+
+/* ── Roll button ──────────────────────────────── */
+.roll-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--c-art), var(--c-d1));
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 2.2rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.roll-btn:hover { opacity: 0.88; }
+
+/* ── Footer ───────────────────────────────────── */
+footer {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 2;
+  border-top: 1px solid var(--surface-border);
+  padding-top: 1.2rem;
+  max-width: 600px;
+  width: 100%;
+}
+
+footer strong { color: var(--c-art); }
