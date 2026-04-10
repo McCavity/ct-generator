@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="de" data-lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verschwörungstheorie-Generator / Conspiracy Theory Generator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script>
+    // Apply stored language immediately — prevents flash of wrong language
+    (function () {
+      var l = localStorage.getItem('ctg-lang') || 'de';
+      document.documentElement.setAttribute('data-lang', l);
+      document.documentElement.setAttribute('lang', l);
+    })();
+  </script>
+</head>
+<body class="{{ theme }}">
+
+  <header>
+    <h1>
+      <span class="lang-de">Verschwörungstheorie-Generator</span>
+      <span class="lang-en">Conspiracy Theory Generator</span>
+    </h1>
+    <p class="subtitle">
+      <span class="lang-de">Conspiracy Theory Generator</span>
+      <span class="lang-en">Verschwörungstheorie-Generator</span>
+    </p>
+  </header>
+
+  <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">
+    <span class="flag">🇩🇪</span>
+    <span class="code code-de">DE</span>
+    <span class="sep">|</span>
+    <span class="flag">🇬🇧</span>
+    <span class="code code-en">EN</span>
+  </button>
+
+  <div class="disclaimer">
+    ⚠️&nbsp; <strong>This is fiction, not facts!</strong>
+    &nbsp;·&nbsp; Nach einer Idee von Dr. Axel Stoll
+  </div>
+
+  {# ── German dice row ── #}
+  <div class="lang-de">
+    <div class="dice-row">
+      <div class="die-card die-art">
+        <div class="die-label">Artikel</div>
+        <div class="die-value">{{ roll.de.article }}</div>
+        <span class="die-badge">D3</span>
+      </div>
+      <div class="die-card die-d1">
+        <div class="die-label">Würfel 1</div>
+        <div class="die-value">{{ roll.de.d1 }}</div>
+        <span class="die-badge">D20</span>
+      </div>
+      <div class="die-card die-d2">
+        <div class="die-label">Würfel 2</div>
+        <div class="die-value">{{ roll.de.d2 }}</div>
+        <span class="die-badge">D20</span>
+      </div>
+      <div class="die-card die-d3">
+        <div class="die-label">Würfel 3</div>
+        <div class="die-value">{{ roll.de.d3 }}</div>
+        <span class="die-badge">D20</span>
+      </div>
+      <div class="die-card die-d4">
+        <div class="die-label">Würfel 4</div>
+        <div class="die-value">{{ roll.de.d4 }}</div>
+        <span class="die-badge">D20</span>
+      </div>
+      <div class="die-card die-d5">
+        <div class="die-label">Würfel 5</div>
+        <div class="die-value">{{ roll.de.d5 }}</div>
+        <span class="die-badge">D20</span>
+      </div>
+    </div>
+
+    <div class="sentence-box">
+      <div class="sentence-label">Die Verschwörungstheorie</div>
+      <p class="sentence">
+        <span class="s-art">{{ roll.de.article }}</span>
+        <span> </span>
+        <span class="s-d1">{{ roll.de.d1 }}</span>
+        <span> </span>
+        <span class="s-d2">{{ roll.de.d2 }}</span><span class="s-d3">{{ roll.de.d3 }}</span>
+        <span class="s-func"> plant </span>
+        <span class="s-d4">{{ roll.de.d4 }}</span>
+        <span class="s-func"> mit Hilfe von </span>
+        <span class="s-d5">{{ roll.de.d5 }}</span>.
+      </p>
+    </div>
+  </div>
+
+  {# ── English dice row ── #}
+  <div class="lang-en">
+    <div class="dice-row">
+      <div class="die-card die-art">
+        <div class="die-label">Article</div>
+        <div class="die-value">{{ roll.en.article }}</div>
+        <span class="die-badge">D1</span>
+      </div>
+      <div class="die-card die-d1">
+        <div class="die-label">Die 1</div>
+        <div class="die-value">{{ roll.en.d1 }}</div>
+        <span class="die-badge">D20</span>
+      </div>
+      <div class="die-card die-d2">
+        <div class="die-label">Die 2</div>
+        <div class="die-value">{{ roll.en.d2 }}</div>
+        <span class="die-badge">D20</span>
+      </div>
+      <div class="die-card die-d3">
+        <div class="die-label">Die 3</div>
+        <div class="die-value">{{ roll.en.d3 }}</div>
+        <span class="die-badge">D20</span>
+      </div>
+      <div class="die-card die-d4">
+        <div class="die-label">Die 4</div>
+        <div class="die-value">{{ roll.en.d4 }}</div>
+        <span class="die-badge">D20</span>
+      </div>
+      <div class="die-card die-d5">
+        <div class="die-label">Die 5</div>
+        <div class="die-value">{{ roll.en.d5 }}</div>
+        <span class="die-badge">D20</span>
+      </div>
+    </div>
+
+    <div class="sentence-box">
+      <div class="sentence-label">The Conspiracy Theory</div>
+      <p class="sentence">
+        <span class="s-art">{{ roll.en.article }}</span>
+        <span> </span>
+        <span class="s-d1">{{ roll.en.d1 }}</span>
+        <span> </span>
+        <span class="s-d2">{{ roll.en.d2 }}</span><span class="s-d3">{{ roll.en.d3 }}</span>
+        <span class="s-func"> is plotting </span>
+        <span class="s-d4">{{ roll.en.d4 }}</span>
+        <span class="s-func"> with the help of </span>
+        <span class="s-d5">{{ roll.en.d5 }}</span>.
+      </p>
+    </div>
+  </div>
+
+  <a href="/" class="roll-btn">
+    <span class="lang-de">🎲 Neu würfeln</span>
+    <span class="lang-en">🎲 Roll again</span>
+  </a>
+
+  <footer>
+    <strong>This is fiction, not facts!</strong><br>
+    <span class="lang-de">
+      Alle angezeigten Theorien sind vollständig fiktiv und entsprechen keinerlei Tatsachen.<br>
+    </span>
+    <span class="lang-en">
+      All displayed theories are entirely fictional and bear no resemblance to facts.<br>
+    </span>
+    Nach einer Idee von Dr. Axel Stoll
+  </footer>
+
+  <script>
+    (function () {
+      var toggle = document.getElementById('lang-toggle');
+      toggle.addEventListener('click', function () {
+        var current = document.documentElement.getAttribute('data-lang');
+        var next = current === 'de' ? 'en' : 'de';
+        document.documentElement.setAttribute('data-lang', next);
+        document.documentElement.setAttribute('lang', next);
+        localStorage.setItem('ctg-lang', next);
+      });
+    })();
+  </script>
+
+</body>
+</html>
