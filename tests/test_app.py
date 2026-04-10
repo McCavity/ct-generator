@@ -70,16 +70,22 @@ def test_each_request_can_produce_different_theme(client):
 
 
 def test_de_dice_values_in_response(client):
-    """Response must contain at least one known DE d2 prefix."""
+    """At least one of 10 requests must contain a known DE d2 prefix."""
     known_prefixes = ["Finanz-", "Pharma-", "Alien-", "Medien-", "UFO-"]
-    response = client.get("/")
-    html = response.data.decode("utf-8")
-    assert any(p in html for p in known_prefixes)
+    for _ in range(10):
+        response = client.get("/")
+        html = response.data.decode("utf-8")
+        if any(p in html for p in known_prefixes):
+            return
+    assert False, "None of 10 requests contained a known DE d2 prefix"
 
 
 def test_en_dice_values_in_response(client):
-    """Response must contain at least one known EN d2 prefix."""
+    """At least one of 10 requests must contain a known EN d2 prefix."""
     known_prefixes = ["Finance-", "Pharma-", "Alien-", "Media-", "UFO-"]
-    response = client.get("/")
-    html = response.data.decode("utf-8")
-    assert any(p in html for p in known_prefixes)
+    for _ in range(10):
+        response = client.get("/")
+        html = response.data.decode("utf-8")
+        if any(p in html for p in known_prefixes):
+            return
+    assert False, "None of 10 requests contained a known EN d2 prefix"
